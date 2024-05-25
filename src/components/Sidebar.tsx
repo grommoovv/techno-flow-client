@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import cls from './Sidebar.module.scss'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
 import { Navbar } from './Navbar'
 
 interface SidebarProps {}

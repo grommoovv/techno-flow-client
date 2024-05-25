@@ -1,0 +1,33 @@
+.Table {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+.TableHeader {
+}
+
+.TableBody {
+}
+
+.TableFooter {
+}
+
+.TableRow {
+  display: grid;
+  border-bottom: 1px solid rgb(228, 228, 231);
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgb(244 244 245 / 0.5);
+  }
+}
+
+.TableHead {
+}
+
+.TableCell {
+  padding: 8px;
+}
+
+.TableCaption {
+}

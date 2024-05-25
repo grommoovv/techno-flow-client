@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import cls from './Navbar.module.scss'
 import { Link, useLocation } from 'react-router-dom'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
 
-import { RxCalendar, RxDesktop, RxHome } from 'react-icons/rx'
+import { RxCalendar, RxDesktop, RxHome, RxPerson } from 'react-icons/rx'
 
 const navLinks = [
   {
@@ -14,12 +14,18 @@ const navLinks = [
   },
   {
     id: 2,
+    url: '/users',
+    label: 'Пользователи',
+    icon: <RxPerson size={16} />,
+  },
+  {
+    id: 3,
     url: '/events',
     label: 'Мероприятия',
     icon: <RxCalendar size={16} />,
   },
   {
-    id: 3,
+    id: 4,
     url: '/equipments',
     label: 'Оборудование',
     icon: <RxDesktop size={16} />,
