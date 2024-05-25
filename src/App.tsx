@@ -1,4 +1,4 @@
-import '@/styles/globals.scss'
+import '@/shared/styles/globals.scss'
 // import { Button } from './components/ui/button'
 import { Router } from './router'
 
