@@ -12,8 +12,6 @@ const head = [
   { id: 4, text: 'Почта' },
 ]
 
-interface UserDataTable {}
-
 const UserDataTable: FC = () => {
   const { data, error, loading } = useAppSelector(selectUser)
   const dispatch = useAppDispatch()

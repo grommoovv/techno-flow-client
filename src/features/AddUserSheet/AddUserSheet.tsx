@@ -9,9 +9,7 @@ import {
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 
-interface AddUserSheetProps {}
-
-const AddUserSheet: FC<AddUserSheetProps> = () => {
+const AddUserSheet: FC = () => {
   return (
     <>
       <Sheet>

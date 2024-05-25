@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button'
 import { FC } from 'react'
-// import cls from './Events.module.scss'
 
 interface EventsProps {}
 

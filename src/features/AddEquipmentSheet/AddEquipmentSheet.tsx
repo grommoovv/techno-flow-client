@@ -9,8 +9,6 @@ import {
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 
-interface AddEquipmentSheetProps {}
-
 const AddEquipmentSheet: FC = () => {
   return (
     <>

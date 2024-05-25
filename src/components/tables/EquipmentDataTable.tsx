@@ -17,8 +17,6 @@ const head = [
   { id: 7, text: 'Пользователь' },
 ]
 
-interface EquipmentDataTableProps {}
-
 const EquipmentDataTable: FC = () => {
   const dispatch = useAppDispatch()
   const { data, error, loading } = useAppSelector(selectEquipment)
