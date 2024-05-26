@@ -4,10 +4,13 @@ import { Home } from './pages/Home'
 import { Events } from './pages/Events'
 import { Equipments } from './pages/Equipments'
 import { Users } from './pages/Users'
+import { SignIn } from './pages/SignIn'
 
 const Router = () => {
   return (
     <Routes>
+      <Route path='/sign-in' element={<SignIn />} />
+
       <Route element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='/events' element={<Events />} />

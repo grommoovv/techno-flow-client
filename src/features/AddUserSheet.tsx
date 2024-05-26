@@ -1,13 +1,7 @@
 import { FC } from 'react'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
+import { AddUserForm } from '@/components/forms/AddUserForm'
 
 const AddUserSheet: FC = () => {
   return (
@@ -19,11 +13,8 @@ const AddUserSheet: FC = () => {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Новый пользователь</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your account and remove
-              your data from our servers.
-            </SheetDescription>
           </SheetHeader>
+          <AddUserForm />
         </SheetContent>
       </Sheet>
     </>

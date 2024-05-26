@@ -1,6 +1,5 @@
 import { OverviewCard } from '@/components/OverviewCard'
 import { FC } from 'react'
-import cls from './Home.module.scss'
 
 export interface OverviewInfo {
   id: number
@@ -38,12 +37,12 @@ const Home: FC<HomeProps> = () => {
             <span className='text-purple-400'>Username</span>
           </h1>
         </section>
-        <section className={cls.overview}>
-          <div>
+        <section className='grid grid-cols-4 gap-5'>
+          <div className='font-medium leading-7'>
             <div>TechnoFlow</div>
             <div>
-              система мониторинга и управления состоянием оборудования малым предприятием
-              молодежного творчества
+              <div>Мониторинг и управление</div>
+              <div>оборудованием</div>
             </div>
           </div>
           {overviewInfo.map((info) => (

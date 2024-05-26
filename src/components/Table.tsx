@@ -3,13 +3,13 @@ import { FC, PropsWithChildren } from 'react'
 import cls from './Table.module.scss'
 
 const Table: FC<PropsWithChildren> = ({ children }) => (
-  <div className='relative w-full overflow-auto'>
+  <div className={cn(cls.Table, 'relative w-full overflow-auto rounded-2xl border')}>
     <div className={cn('w-full text-sm')}>{children}</div>
   </div>
 )
 
 const TableHeader: FC<PropsWithChildren> = ({ children }) => (
-  <div className={cn('')}>{children}</div>
+  <div className={cn(cls.TableHeader, '')}>{children}</div>
 )
 
 const TableBody: FC<PropsWithChildren> = ({ children }) => <div className={cn('')}>{children}</div>
@@ -25,18 +25,18 @@ interface TableRow extends PropsWithChildren {
 const TableRow: FC<TableRow> = ({ children, cols }) => (
   <div
     style={{ gridTemplateColumns: `minmax(0, 36px) repeat(${cols - 1}, minmax(0, 1fr))` }}
-    className={cn(cls.TableRow, '')}
+    className={cn(cls.TableRow, 'grid cursor-pointer hover:bg-[#f4f4f580]')}
   >
     {children}
   </div>
 )
 
 const TableHead: FC<PropsWithChildren> = ({ children }) => (
-  <div className={cn(cls.TableHead, 'p-2 font-medium text-zinc-500')}>{children}</div>
+  <div className={cn(cls.TableHead, 'p-3 font-medium text-zinc-500')}>{children}</div>
 )
 
 const TableCell: FC<PropsWithChildren> = ({ children }) => (
-  <div className={cn(cls.TableCell, '')}>{children}</div>
+  <div className={cn(cls.TableCell, 'p-3')}>{children}</div>
 )
 
 const TableCaption: FC<PropsWithChildren> = ({ children }) => (

@@ -9,12 +9,10 @@ export const getUsers = createAsyncThunk(
   //
   async function (_, { rejectWithValue }) {
     try {
-      console.log('getUsers called')
-
       const req = await fetch('http://localhost:8000/api/v1/users')
 
       if (!req.ok) {
-        return rejectWithValue(`Http error: ${req.body}`)
+        return rejectWithValue(`http error: ${req.body}`)
       }
 
       const resp = (await req.json()) as IDataResponse<IUser[]>

@@ -15,9 +15,9 @@ const RootLayout: FC<RootLayoutProps> = () => {
 
   return (
     <>
-      <div className={'flex gap-5 p-5 max-w-[1920px] w-full'}>
+      <div className={'flex gap-5 p-5 max-w-[1920px] w-full bg-gray-200'}>
         <Sidebar />
-        <main className='w-full'>
+        <main className='w-full bg-white p-5 rounded-2xl min-h-[calc(100vh-40px)]'>
           <Outlet />
         </main>
       </div>

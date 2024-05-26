@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { EquipmentDataTable } from '@/components/tables/EquipmentDataTable'
-import { AddEquipmentSheet } from '@/features/AddEquipmentSheet/AddEquipmentSheet'
+import { AddEquipmentSheet } from '@/features/AddEquipmentSheet'
 import { useAppSelector } from '@/redux'
 import { selectEquipment } from '@/redux/domain/equipment/slice'
 // import cls from './Equipments.module.scss'
@@ -14,7 +14,7 @@ const Equipments: FC<EquipmentsProps> = () => {
       <section className='flex flex-col gap-10'>
         <div className='flex justify-between items-end'>
           <h1 className='text-6xl font-medium leading-none tracking-tight'>
-            Пользователи
+            Оборудование
             <span className='text-slate-400 text-2xl ml-2'>{data?.length}</span>
           </h1>
           <AddEquipmentSheet />

@@ -1,5 +1,5 @@
 import { UserDataTable } from '@/components/tables/UserDataTable'
-import { AddUserSheet } from '@/features/AddUserSheet/AddUserSheet'
+import { AddUserSheet } from '@/features/AddUserSheet'
 import { useAppSelector } from '@/redux'
 import { selectUser } from '@/redux/domain/user/slice'
 import { FC } from 'react'
@@ -8,6 +8,7 @@ interface UsersProps {}
 
 const Users: FC<UsersProps> = () => {
   const { data } = useAppSelector(selectUser)
+
   return (
     <>
       <section className='flex flex-col gap-10'>
