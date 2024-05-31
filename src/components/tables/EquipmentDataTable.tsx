@@ -37,13 +37,13 @@ const EquipmentDataTable: FC<EquipmentDataTableProps> = ({ equipment }) => {
               <TableCell>{eq.title}</TableCell>
               <TableCell>{eq.status}</TableCell>
               <TableCell>{eq.is_available ? 'Да' : 'Нет'}</TableCell>
-              <TableCell>
+              {/* <TableCell>
                 {eq.available_at ? formatData.format(new Date(eq.available_at)) : '-'}
               </TableCell>
               <TableCell>
                 {eq.reserved_at ? formatData.format(new Date(eq.reserved_at)) : '-'}
               </TableCell>
-              <TableCell>{eq.user_id ?? '-'}</TableCell>
+              <TableCell>{eq.user_id ?? '-'}</TableCell> */}
             </TableRow>
           </Link>
         ))}
