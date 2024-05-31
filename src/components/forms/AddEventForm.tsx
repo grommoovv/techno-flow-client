@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Button } from '../ui/button'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from '../ui/form'
 import { Input } from '../ui/input'
@@ -10,7 +10,14 @@ import { cn } from '@/shared/lib/utils'
 import { format } from 'date-fns'
 import { Calendar } from '../ui/calendar'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { useGetAvailabileEquipment, useGetEquipment } from '@/api/equipment/queries'
@@ -20,6 +27,17 @@ import { IEventCreateDto } from '@/api/events/service'
 import { useAuth } from '@/context/auth'
 import { Skeleton } from '../ui/skeleton'
 import { Label } from '../ui/label'
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { ScrollArea } from '../ui/scroll-area'
+import { toast } from 'sonner'
 
 const eventTypes = [
   {
@@ -56,7 +74,15 @@ const AddEventValidation = z.object({
   equipment_id: z.array(z.number()).default([]),
 })
 
+const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`)
+
+type Checked = DropdownMenuCheckboxItemProps['checked']
+
 const AddEventForm: FC = () => {
+  const [showStatusBar, setShowStatusBar] = useState<Checked>(true)
+  const [showActivityBar, setShowActivityBar] = useState<Checked>(false)
+  const [showPanel, setShowPanel] = useState<Checked>(false)
+
   const { user } = useAuth()
 
   const form = useForm<z.infer<typeof AddEventValidation>>({
@@ -67,8 +93,55 @@ const AddEventForm: FC = () => {
     },
   })
 
-  const { data: equipment, isLoading, error: equipmentError } = useGetAvailabileEquipment()
-  const { mutateAsync: createEventMutation, isPending, error: eventError } = useCreateEvent()
+  // const { data: equipment, isLoading, error: equipmentError } = useGetAvailabileEquipment()
+  const {
+    data: equipment,
+    mutateAsync: getAvailableEquipmentMutate,
+    isPending: isEquipmentPending,
+    error: equipmentError,
+  } = useGetAvailabileEquipment()
+
+  const {
+    mutateAsync: createEventMutation,
+    isPending: isEventPending,
+    error: eventError,
+  } = useCreateEvent()
+
+  const checkAvailableEquipment = async () => {
+    const { date, start_hours, start_minutes, end_hours, end_minutes } = form.getValues()
+
+    console.log(form.getValues())
+
+    if (
+      date == undefined ||
+      start_hours == undefined ||
+      start_minutes == undefined ||
+      end_hours == undefined ||
+      end_minutes == undefined
+    ) {
+      toast.error('Необходимо заполнить время начала и конца мероприятия')
+      return
+    }
+
+    const start_date = new Date(date)
+    start_date.setHours(Number(start_hours))
+    start_date.setMinutes(Number(start_minutes))
+
+    const end_date = new Date(date)
+    end_date.setHours(Number(end_hours))
+    end_date.setMinutes(Number(end_minutes))
+
+    const obj = {
+      start_date,
+      end_date,
+    }
+
+    try {
+      await getAvailableEquipmentMutate(obj)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 
   const handleAddEvent = async (value: z.infer<typeof AddEventValidation>) => {
     const { date, start_hours, start_minutes, end_hours, end_minutes } = value
@@ -238,53 +311,61 @@ const AddEventForm: FC = () => {
 
             <div className='flex flex-col gap-2'>
               <Label className='font-semibold'>Доступное оборудование</Label>
-              {isLoading && (
-                <ul className='flex flex-wrap gap-2'>
-                  {Array.from({ length: 8 }, (_, index) => (
-                    <li>
-                      <Skeleton className='h-8 w-20' key={index} />
-                    </li>
-                  ))}
-                </ul>
-              )}
 
-              {equipmentError && <div>Нет свободного оборудования</div>}
+              <DropdownMenu>
+                <DropdownMenuTrigger className='w-52' asChild>
+                  <Button variant='outline'>Выбрать оборудование</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className='w-60'>
+                  <DropdownMenuLabel className='flex justify-between'>
+                    Оборудование
+                    <div className='cursor-pointer' onClick={checkAvailableEquipment}>
+                      Поиск
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
 
-              {equipment && (
-                <ul className='flex gap-2 mt-2 flex-wrap'>
-                  {equipment?.map((item) => (
-                    <li className='border p-2 rounded-lg w-max' key={item.id}>
-                      <FormField
-                        key={item.id}
-                        control={form.control}
-                        name='equipment_id'
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={item.id}
-                              className='flex flex-row items-center space-x-3 space-y-0'
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, item.id])
-                                      : field.onChange(
-                                          field.value?.filter((value) => value !== item.id)
-                                        )
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className='text-sm font-normal'>{item.title}</FormLabel>
-                            </FormItem>
-                          )
-                        }}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              )}
+                  <ScrollArea className='max-h-[200px] w-48 rounded-md'>
+                    <ul className='flex flex-col gap-2 p-[10px]'>
+                      {equipment?.map((item) => (
+                        <li className='rounded-lg max-w border-b pb-2 px-2' key={item.id}>
+                          <FormField
+                            key={item.id}
+                            control={form.control}
+                            name='equipment_id'
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={item.id}
+                                  className='flex flex-row items-center space-x-3 space-y-0'
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(item.id)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...field.value, item.id])
+                                          : field.onChange(
+                                              field.value?.filter((value) => value !== item.id)
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className='text-sm font-normal'>
+                                    {item.title}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        </li>
+                      ))}
+                      {isEquipmentPending && <div className='text-sm font-medium'>Загрузка...</div>}
+                      {equipmentError && <div className='text-sm font-medium'>Тут пусто...</div>}
+                    </ul>
+                  </ScrollArea>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <Button type='submit' className='shad-button_primary'>

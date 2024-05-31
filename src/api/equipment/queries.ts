@@ -11,9 +11,8 @@ export const useGetEquipment = () => {
 }
 
 export const useGetAvailabileEquipment = () => {
-  return useQuery({
-    queryKey: [QUERY_KEYS.GET_AVAILABLE_EQUIPMENT],
-    queryFn: () => Equipment.getAvailable(),
+  return useMutation({
+    mutationFn: (data: { start_date: Date; end_date: Date }) => Equipment.getAvailableByDate(data),
   })
 }
 

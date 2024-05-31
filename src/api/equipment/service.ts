@@ -24,9 +24,12 @@ export const Equipment = {
     }
   },
 
-  async getAvailable() {
+  async getAvailableByDate(data: { start_date: Date; end_date: Date }) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/equipment/available')
+      const req = await fetch('http://localhost:8000/api/v1/equipment/available', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      })
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -72,7 +75,7 @@ export const Equipment = {
 
   async getUsageHistoryById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/equipment/usage/${id}`)
+      const req = await fetch(`http://localhost:8000/api/v1/equipment/history/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
