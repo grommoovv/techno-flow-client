@@ -14,37 +14,20 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import { useSignInAccount } from '@/api'
+import { useAuth } from '@/context/auth'
 
-const SignInValidation = z.object({
+const SignInVal = z.object({
   username: z.string(),
   password: z.string().min(8, { message: 'Password must be at least 8 characters.' }),
 })
 
 const SignIn: FC = () => {
-  const form = useForm<z.infer<typeof SignInValidation>>({
-    resolver: zodResolver(SignInValidation),
-    defaultValues: {
-      username: '',
-      password: '',
-    },
-  })
+  const form = useForm<z.infer<typeof SignInVal>>({ resolver: zodResolver(SignInVal) })
 
-  const { isPending, mutateAsync: signInAccount } = useSignInAccount()
+  const { signInAccount } = useAuth()
 
-  const handleSignin = async (user: z.infer<typeof SignInValidation>) => {
-    // const session = await signInAccount(user)
-    // if (!session) {
-    //   toast('failed to sign-in. Please try again.')
-    //   return
-    // }
-    // if (isLoggedIn) {
-    //   form.reset()
-    //   navigate('/')
-    // } else {
-    //   toast('failed to sign-in. Please try again.')
-    //   return
-    // }
+  const handleSignIn = async (value: z.infer<typeof SignInVal>) => {
+    await signInAccount({ username: value.username, password: value.password })
   }
 
   return (
@@ -61,7 +44,7 @@ const SignIn: FC = () => {
           <Form {...form}>
             <div className='flex flex-center flex-col min-w-96 mt-5'>
               <form
-                onSubmit={form.handleSubmit(handleSignin)}
+                onSubmit={form.handleSubmit(handleSignIn)}
                 className='flex flex-col gap-5 w-full mt-4'
               >
                 <FormField

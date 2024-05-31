@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
+import { AddEquipmentForm } from '@/components/forms/AddEquipmentForm'
 
 const AddEquipmentSheet: FC = () => {
   return (
@@ -13,6 +14,7 @@ const AddEquipmentSheet: FC = () => {
           <SheetHeader>
             <SheetTitle>Новое оборудование</SheetTitle>
           </SheetHeader>
+          <AddEquipmentForm />
         </SheetContent>
       </Sheet>
     </>

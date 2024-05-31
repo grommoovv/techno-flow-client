@@ -5,29 +5,38 @@ import { Input } from '../ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useCreateUser } from '@/api/users/queries'
 
 const AddUserValidation = z.object({
-  username: z.string(),
-  password: z.string().min(8, { message: 'Password must be at least 8 characters.' }),
+  username: z
+    .string()
+    .min(4, { message: 'username must be at least 4 characters.' })
+    .max(24, { message: 'max length 24 characters.' }),
+  password: z
+    .string()
+    .min(8, { message: 'password must be at least 8 characters.' })
+    .max(32, { message: 'max length 32 characters.' }),
 })
 
 const AddUserForm: FC = () => {
   const form = useForm<z.infer<typeof AddUserValidation>>({
     resolver: zodResolver(AddUserValidation),
-    defaultValues: {
-      username: '',
-      password: '',
-    },
+    defaultValues: { username: '', password: '' },
   })
 
-  const handleAddUser = () => {}
+  const { mutateAsync: createUserMutation, isPending, error } = useCreateUser()
+
+  const handleSubmit = async (data: z.infer<typeof AddUserValidation>) => {
+    await createUserMutation(data as { username: string; password: string })
+    form.reset()
+  }
 
   return (
     <>
       <Form {...form}>
         <div className='flex flex-center flex-col min-w-96 mt-5'>
           <form
-            onSubmit={form.handleSubmit(handleAddUser)}
+            onSubmit={form.handleSubmit(handleSubmit)}
             className='flex flex-col gap-5 w-full mt-4'
           >
             <FormField
@@ -59,7 +68,7 @@ const AddUserForm: FC = () => {
             />
 
             <Button type='submit' className='shad-button_primary'>
-              Создать
+              Добавить
             </Button>
           </form>
         </div>

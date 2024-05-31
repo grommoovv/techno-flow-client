@@ -1,4 +1,5 @@
 import { OverviewCard } from '@/components/OverviewCard'
+import { useAuth } from '@/context/auth'
 import { FC } from 'react'
 
 export interface OverviewInfo {
@@ -28,13 +29,15 @@ const overviewInfo: OverviewInfo[] = [
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
+  const { user } = useAuth()
+
   return (
     <>
       <div className='flex flex-col gap-5'>
         <section className=''>
-          <h1 className='text-6xl font-medium leading-none tracking-tight'>
+          <h1 className='h1'>
             Привет, &nbsp;
-            <span className='text-purple-400'>Username</span>
+            <span className='text-slate-400'>{user?.username}</span>
           </h1>
         </section>
         <section className='grid grid-cols-4 gap-5'>

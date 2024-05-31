@@ -1,32 +1,78 @@
-import { IUser } from '@/redux/domain/user/types'
-import { IDataResponse } from '@/shared/types'
+import { AxiosResponse } from 'axios'
+import { IDataResponse, IUser } from '../types'
+import { $api } from '../axios'
 
-export interface SignInAccountDto {
+export interface SignInDto {
   username: string
   password: string
 }
 
-export const signInAccount = async (credentials: SignInAccountDto) => {
-  try {
-    const req = await fetch('http://localhost:8000/api/v1/auth/sign-in', {
-      body: JSON.stringify(credentials),
-    })
+export const User = {
+  async getAll() {
+    try {
+      const req = await fetch('http://localhost:8000/api/v1/users')
 
-    if (!req.ok) {
-      throw new Error(`Http error: ${req.status}`)
+      if (!req.ok) {
+        throw new Error(`http error: ${req.body}`)
+      }
+
+      const resp = (await req.json()) as IDataResponse<IUser[]>
+
+      if (resp.data) {
+        return resp.data as IUser[]
+      }
+
+      throw new Error(`failed to fetch users: ${resp.error}`)
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(e.message)
+      }
+      throw new Error(`failed to fetch users: ${e}`)
     }
+  },
 
-    const resp = (await req.json()) as IDataResponse<IUser>
+  async getById(id: number) {
+    try {
+      const req = await fetch(`http://localhost:8000/api/v1/users/${id}`)
 
-    if (resp.data) {
-      return resp.data as IUser
+      if (!req.ok) {
+        throw new Error(`http error: ${req.body}`)
+      }
+
+      const resp = (await req.json()) as IDataResponse<IUser>
+
+      if (resp.data) {
+        return resp.data as IUser
+      }
+
+      throw new Error(`failed to fetch user: ${resp.error}`)
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(e.message)
+      }
+      throw new Error(`failed to fetch user: ${e}`)
     }
+  },
 
-    throw new Error(`failed to sign-in: ${resp.error}`)
-  } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(`failed to sign-in: ${e.message}`)
+  async create(data: { username: string; password: string }) {
+    try {
+      const req = await fetch('http://localhost:8000/api/v1/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!req.ok) {
+        throw new Error(`http error: ${req.body}`)
+      }
+    } catch (e) {
+      throw new Error(`failed to create user: ${e}`)
     }
-    throw new Error(`failed to sign-in: ${e}`)
-  }
+  },
+
+  async update() {},
+
+  async delete() {},
 }

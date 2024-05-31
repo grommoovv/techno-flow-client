@@ -25,7 +25,7 @@ interface TableRow extends PropsWithChildren {
 const TableRow: FC<TableRow> = ({ children, cols }) => (
   <div
     style={{ gridTemplateColumns: `minmax(0, 36px) repeat(${cols - 1}, minmax(0, 1fr))` }}
-    className={cn(cls.TableRow, 'grid cursor-pointer hover:bg-[#f4f4f580]')}
+    className={cn(cls.TableRow, 'grid cursor-pointer hover:bg-[#f4f4f580] transition-all')}
   >
     {children}
   </div>

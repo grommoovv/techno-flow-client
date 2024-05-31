@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import cls from './Navbar.module.scss'
+// import cls from './Navbar.module.scss'
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '@/shared/lib/utils'
 
-import { RxCalendar, RxDesktop, RxHome, RxPerson } from 'react-icons/rx'
+import { RxCalendar, RxDesktop, RxHome, RxPerson, RxUpdate } from 'react-icons/rx'
 
 const navLinks = [
   {
@@ -26,9 +26,15 @@ const navLinks = [
   },
   {
     id: 4,
-    url: '/equipments',
+    url: '/equipment',
     label: 'Оборудование',
     icon: <RxDesktop size={16} />,
+  },
+  {
+    id: 5,
+    url: '/maintenance',
+    label: 'Тех. Обслуживание',
+    icon: <RxUpdate size={16} />,
   },
 ]
 
@@ -39,13 +45,13 @@ const Navbar: FC<NavbarProps> = () => {
 
   return (
     <>
-      <div className={cls.navbar}>
+      <div className=''>
         <div className='flex flex-col gap-1'>
           {navLinks.map((link) => (
             <Link
               className={cn(
-                cls.link,
-                pathname == link.url && `bg-zinc-50 text-zinc-900`,
+                'hover:bg-zinc-800 transition-all',
+                pathname == link.url && `bg-zinc-50 text-zinc-900 hover:bg-zinc-50`,
                 'flex items-center text-sm rounded-lg px-5 py-2 gap-2'
               )}
               to={link.url}
@@ -53,8 +59,7 @@ const Navbar: FC<NavbarProps> = () => {
             >
               <div
                 className={cn(
-                  cls.icon,
-                  pathname == link.url && `bg-zinc-900 text-zinc-50`,
+                  pathname == link.url && `bg-zinc-900 text-zinc-50 `,
                   `p-2 rounded-lg`
                 )}
               >

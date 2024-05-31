@@ -14,3 +14,15 @@ body {
   font-variation-settings: 'slnt' 0;
   min-height: 100vh;
 }
+
+@layer utilities {
+  .h1 {
+    @apply text-zinc-800 text-6xl font-semibold leading-none tracking-tight;
+  }
+  .h2 {
+    @apply text-zinc-800 text-xl font-semibold leading-none tracking-tight;
+  }
+  .h3 {
+    @apply text-zinc-800;
+  }
+}
