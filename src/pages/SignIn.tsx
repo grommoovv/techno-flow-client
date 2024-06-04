@@ -36,9 +36,9 @@ const SignIn: FC = () => {
         style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0,1fr)' }}
         className='w-full h-[100vh] rounded-xl border border-zinc-200  text-zinc-950 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50'
       >
-        <div className='h-full bg-slate-200 rounded-xl'></div>
+        <div className='h-full bg-slate-200'></div>
         <div className='h-full flex flex-1 justify-center items-center flex-col py-10'>
-          <h2 className='text-[28px] font-bold leading-[140%] tracking-tighter;'>
+          <h2 className='text-[28px] font-bold leading-[140%] tracking-tighter'>
             Войдите в свой аккаунт
           </h2>
           <Form {...form}>

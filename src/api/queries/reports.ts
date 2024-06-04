@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Report } from './service'
+import { Report } from '../services/reports'
 import { toast } from 'sonner'
 import { QUERY_KEYS } from '../constants'
 

@@ -5,7 +5,7 @@ import { Input } from '../ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { useCreateUser } from '@/api/users/queries'
+import { useCreateUser } from '@/api/queries/users'
 
 const AddUserValidation = z.object({
   username: z

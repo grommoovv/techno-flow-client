@@ -1,5 +1,5 @@
-// export const ENVIRONMENT = {
-//   BASE_API: process?.env?.BASE_API,
+// export const ENV = {
+//   API: process?.env?.API,
 // }
 
 export enum QUERY_KEYS {
@@ -15,6 +15,7 @@ export enum QUERY_KEYS {
   GET_EQUIPMENT = 'getEquipment',
   GET_AVAILABLE_EQUIPMENT = 'getAvailableEquipment',
   GET_EQUIPMENT_BY_ID = 'getEquipmentById',
+  GET_EQUIPMENT_BY_EVENT_ID = 'getEquipmentByEventId',
   GET_EQUIPMENT_USAGE_HISTORY_BY_ID = 'getEquipmentUsageHistoryById',
 
   // EVENT KEYS
@@ -23,4 +24,7 @@ export enum QUERY_KEYS {
   GET_EVENTS_BY_USER_ID = 'getEventsByUserId',
 
   // REPORTS KEYS
+
+	// MAINTENANCE
+	GET_MAINTENANCE = 'getMaintenance'
 }

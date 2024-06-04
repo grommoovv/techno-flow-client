@@ -1,4 +1,4 @@
-import { useGetUsers } from '@/api/users/queries'
+import { useGetUsers } from '@/api/queries/users'
 import { UserDataTable } from '@/components/tables/UserDataTable'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AddUserSheet } from '@/features/AddUserSheet'

@@ -1,4 +1,4 @@
-import { useGetEquipmentById, useGetEquipmentUsageHistoryById } from '@/api/equipment/queries'
+import { useGetEquipmentById, useGetEquipmentUsageHistoryById } from '@/api/queries/equipment'
 import { EquipmentInfoTable } from '@/components/tables/EquipmentInfoTable'
 import { EquipmentUsageHistoryTable } from '@/components/tables/EquipmentUsageHistoryTable'
 import { CreateReportDialog } from '@/features/CreateReportDialog'
@@ -32,7 +32,7 @@ const DetailedEquipment: FC = () => {
 
         <div>
           <h2 className='text-xl font-semibold leading-none tracking-tight mb-4'>Информация</h2>
-          <EquipmentInfoTable info={data} />
+          {data && <EquipmentInfoTable info={data} />}
           <div className='flex gap-4 mt-4'>
             <EditEquipmentDialog />
             <CreateReportDialog equipment={{ id: Number(equipmentId), title: data.title }} />

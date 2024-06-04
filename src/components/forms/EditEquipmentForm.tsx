@@ -1,6 +1,5 @@
 import { FC } from 'react'
 // import cls from './EditEquipmentForm.module.scss'
-import { useUpdateEquipment } from '@/api/equipment/queries'
 import { useParams } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -8,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import { useUpdateEquipment } from '@/api/queries/equipment'
 
 const UpdateEquipmentValidation = z.object({
   title: z.string(),

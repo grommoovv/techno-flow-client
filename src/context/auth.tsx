@@ -1,6 +1,6 @@
 import { $api } from '@/api/axios'
+import { SignInDto } from '@/api/services/users'
 import { IDataResponse, ISignInResponse, IUser } from '@/api/types'
-import { SignInDto } from '@/api/users/service'
 import axios from 'axios'
 import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'

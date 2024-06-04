@@ -1,6 +1,5 @@
 import { FC } from 'react'
 // import cls from './CreateReportForm.module.scss'
-import { useUpdateEquipment } from '@/api/equipment/queries'
 import { useParams } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -11,7 +10,7 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Label } from '../ui/label'
 import { useAuth } from '@/context/auth'
-import { useCreateReport } from '@/api/reports/queries'
+import { useCreateReport } from '@/api/queries/reports'
 
 const CreateReportValidation = z.object({
   message: z.string(),

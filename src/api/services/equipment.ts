@@ -50,6 +50,29 @@ export const Equipment = {
     }
   },
 
+  async getByEventId(id: number) {
+    try {
+      const req = await fetch(`http://localhost:8000/api/v1/equipment/event/${id}`)
+
+      if (!req.ok) {
+        throw new Error(`http error: ${req.body}`)
+      }
+
+      const resp = (await req.json()) as IDataResponse<IEquipment[]>
+
+      if (resp.data) {
+        return resp.data as IEquipment[]
+      }
+
+      throw new Error(`failed to fetch equipment: ${resp.error}`)
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(e.message)
+      }
+      throw new Error(`failed to fetch equipment: ${e}`)
+    }
+  },
+
   async getById(id: number) {
     try {
       const req = await fetch(`http://localhost:8000/api/v1/equipment/${id}`)

@@ -34,6 +34,14 @@ export interface IEvent {
   username?: string
 }
 
+export interface IMaintenance {
+  id: number
+  equipment_id: number
+  equipment_title: string
+  fixed_in: Date
+  created_at: Date
+}
+
 export type DataType = IUser[] | IUser | IEquipment[] | IEquipment
 
 export interface IDataResponse<T> {

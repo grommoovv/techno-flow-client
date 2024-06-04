@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../constants'
-import { User } from './service'
+import { User } from '../services/users'
 import { toast } from 'sonner'
 
 export const useGetUsers = () => {

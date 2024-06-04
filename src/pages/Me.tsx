@@ -1,4 +1,4 @@
-import { useGetEventsByUserId } from '@/api/events/queries'
+import { useGetEventsByUserId } from '@/api/queries/events'
 import { EventCard } from '@/components/cards/EventCard'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'

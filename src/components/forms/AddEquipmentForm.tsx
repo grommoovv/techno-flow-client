@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { useCreateEquipment } from '@/api/equipment/queries'
+import { useCreateEquipment } from '@/api/queries/equipment'
 
 const AddEquipmentValidation = z.object({
   title: z.string(),

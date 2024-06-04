@@ -20,10 +20,8 @@ import {
 } from '../ui/select'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { CalendarIcon } from '@radix-ui/react-icons'
-import { useGetAvailabileEquipment, useGetEquipment } from '@/api/equipment/queries'
 import { Checkbox } from '../ui/checkbox'
-import { useCreateEvent } from '@/api/events/queries'
-import { IEventCreateDto } from '@/api/events/service'
+
 import { useAuth } from '@/context/auth'
 import { Skeleton } from '../ui/skeleton'
 import { Label } from '../ui/label'
@@ -38,6 +36,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ScrollArea } from '../ui/scroll-area'
 import { toast } from 'sonner'
+import { useGetAvailabileEquipment } from '@/api/queries/equipment'
+import { useCreateEvent } from '@/api/queries/events'
+import { IEventCreateDto } from '@/api/services/events'
 
 const eventTypes = [
   {

@@ -15,17 +15,6 @@ interface EventCardProps {
 }
 
 const EventCard: FC<EventCardProps> = ({ event, className }) => {
-  const now = new Date(Date.now())
-
-  if (new Date(event.start_date) <= now && now <= new Date(event.end_date)) {
-    event.status = 'в процессе'
-  } else if (new Date(event.end_date) <= now && new Date(event.start_date) <= now) {
-    event.status = 'завершено'
-  }
-
-  console.log('start_date:', event.start_date)
-  console.log('now:', now)
-
   return (
     <Link to={`/events/${event.id}`}>
       <Card className={cn(className, '')}>

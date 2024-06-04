@@ -1,12 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../constants'
-import { Event, IEventCreateDto } from './service'
+import { Event, IEventCreateDto } from '../services/events'
 import { toast } from 'sonner'
 
 export const useGetEvents = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_EVENTS],
     queryFn: () => Event.getAll(),
+  })
+}
+
+export const useGetEventById = (id: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_EVENT_BY_ID, id],
+    queryFn: () => Event.getById(id),
   })
 }
 

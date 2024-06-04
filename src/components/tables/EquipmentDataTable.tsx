@@ -2,7 +2,7 @@ import { IEquipment } from '@/api/types'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Table'
 import { formatData } from '@/shared/lib/helpers'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 // import cls from './Equipments.module.scss'
 
 const head = [
@@ -12,7 +12,6 @@ const head = [
   { id: 4, text: 'Доступен' },
   { id: 5, text: 'Освободится' },
   { id: 6, text: 'Ближайшая бронь' },
-  { id: 7, text: 'Пользователь' },
 ]
 
 interface EquipmentDataTableProps {
@@ -20,33 +19,43 @@ interface EquipmentDataTableProps {
 }
 
 const EquipmentDataTable: FC<EquipmentDataTableProps> = ({ equipment }) => {
+  const [searchParams, _] = useSearchParams()
+  const availabilityFilter = searchParams.get('available')
+
+  const filteredEquipment = equipment.filter((eq) => {
+    if (availabilityFilter === 'true') {
+      return eq.is_available === true
+    }
+    if (availabilityFilter === 'false') {
+      return eq.is_available === false
+    }
+    return true
+  })
+
   return (
     <Table>
       <TableHeader>
-        <TableRow cols={7}>
+        <TableRow cols={6}>
           {head.map((h) => (
             <TableHead key={h.id}>{h.text}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {equipment.map((eq) => (
-          <Link to={`/equipment/${eq.id}`}>
-            <TableRow cols={7} key={eq.id}>
-              <TableCell>{eq.id}</TableCell>
-              <TableCell>{eq.title}</TableCell>
-              <TableCell>{eq.status}</TableCell>
-              <TableCell>{eq.is_available ? 'Да' : 'Нет'}</TableCell>
-              {/* <TableCell>
-                {eq.available_at ? formatData.format(new Date(eq.available_at)) : '-'}
-              </TableCell>
-              <TableCell>
-                {eq.reserved_at ? formatData.format(new Date(eq.reserved_at)) : '-'}
-              </TableCell>
-              <TableCell>{eq.user_id ?? '-'}</TableCell> */}
-            </TableRow>
-          </Link>
-        ))}
+        {filteredEquipment.length > 0 ? (
+          filteredEquipment.map((eq) => (
+            <Link to={`/equipment/${eq.id}`} key={eq.id}>
+              <TableRow cols={6}>
+                <TableCell>{eq.id}</TableCell>
+                <TableCell>{eq.title}</TableCell>
+                <TableCell>{eq.status}</TableCell>
+                <TableCell>{eq.is_available ? 'Да' : 'Нет'}</TableCell>
+              </TableRow>
+            </Link>
+          ))
+        ) : (
+          <div className='text-center text-slate-400 m-4'>Тут пусто...</div>
+        )}
       </TableBody>
     </Table>
   )

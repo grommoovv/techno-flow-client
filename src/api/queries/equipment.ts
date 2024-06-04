@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../constants'
-import { Equipment } from './service'
+import { Equipment } from '../services/equipment'
 import { toast } from 'sonner'
 
 export const useGetEquipment = () => {
@@ -20,6 +20,13 @@ export const useGetEquipmentById = (id: number) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_EQUIPMENT_BY_ID, id],
     queryFn: () => Equipment.getById(id),
+  })
+}
+
+export const useGetEquipmentByEventId = (id: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_EQUIPMENT_BY_EVENT_ID, id],
+    queryFn: () => Equipment.getByEventId(id),
   })
 }
 
