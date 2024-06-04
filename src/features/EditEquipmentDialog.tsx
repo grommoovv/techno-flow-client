@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -9,9 +9,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { useUpdateEquipment } from '@/api/equipment/queries'
 import { EditEquipmentForm } from '@/components/forms/EditEquipmentForm'
 // import cls from './EditEquipmentDialog.module.scss'
 
