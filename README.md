@@ -6,12 +6,12 @@
 - Tanstack-Query
 - Shadcn-ui
 
-### Build image
+### Build Image
 ```bash
 docker build -t techno-flow-frontend .
 ```
 
-### Run container
+### Run Container
 ```bash
 docker run --rm --name techno-flow-frontend -p 3000:4173 techno-flow-frontend
 ```
