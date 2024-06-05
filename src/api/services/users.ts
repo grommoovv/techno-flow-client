@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { IDataResponse, IUser } from '../types'
 import { $api } from '../axios'
+import { __API__ } from '../constants'
 
 export interface SignInDto {
   username: string
@@ -10,7 +11,7 @@ export interface SignInDto {
 export const User = {
   async getAll() {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/users')
+      const req = await fetch(`${__API__}/users`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -33,7 +34,7 @@ export const User = {
 
   async getById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/users/${id}`)
+      const req = await fetch(`${__API__}/users/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -56,7 +57,7 @@ export const User = {
 
   async create(data: { username: string; password: string }) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/users', {
+      const req = await fetch(`${__API__}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

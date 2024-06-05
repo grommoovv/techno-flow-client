@@ -2,6 +2,8 @@
 //   API: process?.env?.API,
 // }
 
+export const __API__ = 'http://localhost:8080/api/v1'
+
 export enum QUERY_KEYS {
   // AUTH KEYS
 
@@ -25,6 +27,6 @@ export enum QUERY_KEYS {
 
   // REPORTS KEYS
 
-	// MAINTENANCE
-	GET_MAINTENANCE = 'getMaintenance'
+  // MAINTENANCE
+  GET_MAINTENANCE = 'getMaintenance',
 }

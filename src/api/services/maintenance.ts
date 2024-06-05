@@ -1,9 +1,10 @@
+import { __API__ } from '../constants'
 import { IDataResponse, IMaintenance } from '../types'
 
 export const Maintenance = {
   async GetAll() {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/maintenance')
+      const req = await fetch(`${__API__}/maintenance`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -26,7 +27,7 @@ export const Maintenance = {
 
   async GetById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/maintenance/${id}`)
+      const req = await fetch(`${__API__}/maintenance/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)

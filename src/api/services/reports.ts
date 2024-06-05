@@ -1,7 +1,9 @@
+import { __API__ } from "../constants";
+
 export const Report = {
   async create(data: { message: string; user_id: number; equipment_id: number }) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/reports', {
+      const req = await fetch(`${__API__}/reports`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

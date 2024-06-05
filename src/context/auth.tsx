@@ -32,11 +32,9 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    ;(async function () {
-      if (localStorage.getItem('access_token')) {
-        await checkIsUserAuthenticated()
-      }
-    })()
+    if (localStorage.getItem('access_token')) {
+      checkIsUserAuthenticated()
+    }
   }, [])
 
   const signInAccount = async (credentials: SignInDto): Promise<void> => {

@@ -1,3 +1,4 @@
+import { __API__ } from '../constants'
 import { IDataResponse, IEvent } from '../types'
 
 export interface IEventCreateDto {
@@ -12,7 +13,7 @@ export interface IEventCreateDto {
 export const Event = {
   async getAll() {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/events')
+      const req = await fetch(`${__API__}/events`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -35,7 +36,7 @@ export const Event = {
 
   async getById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/events/${id}`)
+      const req = await fetch(`${__API__}/events/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -56,9 +57,9 @@ export const Event = {
     }
   },
 
-	async getByUserId(id: number) {
+  async getByUserId(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/events/user/${id}`)
+      const req = await fetch(`${__API__}/events/user/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -77,11 +78,11 @@ export const Event = {
       }
       throw new Error(`failed to fetch event: ${e}`)
     }
-	},
+  },
 
   async create(data: IEventCreateDto) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/events', {
+      const req = await fetch(`${__API__}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

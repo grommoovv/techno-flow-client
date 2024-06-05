@@ -1,9 +1,10 @@
+import { __API__ } from '../constants'
 import { IDataResponse, IEquipment, IEquipmentUsageHistory } from '../types'
 
 export const Equipment = {
   async getAll() {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/equipment')
+      const req = await fetch(`${__API__}/equipment`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -26,7 +27,7 @@ export const Equipment = {
 
   async getAvailableByDate(data: { start_date: Date; end_date: Date }) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/equipment/available', {
+      const req = await fetch(`${__API__}/equipment/available`, {
         method: 'POST',
         body: JSON.stringify(data),
       })
@@ -52,7 +53,7 @@ export const Equipment = {
 
   async getByEventId(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/equipment/event/${id}`)
+      const req = await fetch(`${__API__}/equipment/event/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -75,7 +76,7 @@ export const Equipment = {
 
   async getById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/equipment/${id}`)
+      const req = await fetch(`${__API__}/equipment/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -98,7 +99,7 @@ export const Equipment = {
 
   async getUsageHistoryById(id: number) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/equipment/history/${id}`)
+      const req = await fetch(`${__API__}/equipment/history/${id}`)
 
       if (!req.ok) {
         throw new Error(`http error: ${req.body}`)
@@ -121,7 +122,7 @@ export const Equipment = {
 
   async create(data: { title: string; status: string }) {
     try {
-      const req = await fetch('http://localhost:8000/api/v1/equipment', {
+      const req = await fetch(`${__API__}/equipment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ export const Equipment = {
 
   async update(data: { id: number; title: string; status: string }) {
     try {
-      const req = await fetch(`http://localhost:8000/api/v1/equipment/${data.id}`, {
+      const req = await fetch(`${__API__}/equipment/${data.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
