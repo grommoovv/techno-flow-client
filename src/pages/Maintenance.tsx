@@ -13,11 +13,13 @@ const Maintenance: FC = () => {
       <div className='flex justify-between items-end'>
         <h1 className='h1'>
           Тех. Обслуживание
-          <span className='text-slate-400 text-2xl ml-2'>{''}</span>
+          <span className='text-slate-400 text-2xl ml-2'>{data?.length}</span>
         </h1>
       </div>
 
       <div>
+        {error && <div>{error.message}</div>}
+
         {isLoading && <div>loading...</div>}
 
         {data && <MaintenanceDataTable data={data} />}

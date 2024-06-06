@@ -9,12 +9,10 @@ import { Skeleton } from '../ui/skeleton'
 interface MyEventsChartProps {}
 
 const MyEventsChart: FC = () => {
-  const {
-    user: { id },
-  } = useAuth()
+  const { user } = useAuth()
   const { data: events, isLoading: isEventsLoading } = useGetEvents()
 
-  const { data: myEvents, isLoading: isMyEventsLoading } = useGetEventsByUserId(id)
+  const { data: myEvents, isLoading: isMyEventsLoading } = useGetEventsByUserId(user?.id)
 
   const percent = calcPercent(myEvents?.length ?? 1, events?.length ?? 1)
 

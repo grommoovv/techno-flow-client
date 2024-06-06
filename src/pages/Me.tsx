@@ -26,25 +26,6 @@ const head = [
   },
 ]
 
-const info = [
-  {
-    id: 1,
-    text: 'Имя',
-  },
-  {
-    id: 2,
-    text: 'Username',
-  },
-  {
-    id: 3,
-    text: 'Email',
-  },
-  {
-    id: 4,
-    text: 'Дата регистрации',
-  },
-]
-
 interface MeProps {}
 
 const Me: FC = () => {
@@ -86,7 +67,7 @@ const Me: FC = () => {
                 <div className='font-medium'>{user?.username}</div>
                 <div className='font-medium'>{user?.email || 'Не указано'}</div>
                 <div className='font-medium'>
-                  {user.created_at ? formatData.format(new Date(user?.created_at)) : '-'}
+                  {user?.created_at ? formatData.format(new Date(user?.created_at)) : '-'}
                 </div>
               </div>
             </div>

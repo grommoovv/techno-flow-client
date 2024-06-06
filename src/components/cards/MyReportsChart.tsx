@@ -9,12 +9,10 @@ import { Skeleton } from '../ui/skeleton'
 interface MyReportsChartProps {}
 
 const MyReportsChart: FC = () => {
-  const {
-    user: { id },
-  } = useAuth()
+  const { user } = useAuth()
   const { data: reports, isLoading: isReportsLoading } = useGetReports()
 
-  const { data: myReports, isLoading: isMyReportsLoading } = useGetReportsByUserId(id)
+  const { data: myReports, isLoading: isMyReportsLoading } = useGetReportsByUserId(user?.id)
 
   const percent = calcPercent(myReports?.length, reports?.length)
 
