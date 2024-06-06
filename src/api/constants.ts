@@ -1,4 +1,4 @@
-export const __API__ = (import.meta.env.BASE_API_URL || 'http://localhost:8080/api/v1') as string
+export const __API__ = 'http://localhost:8080/api/v1'
 
 export enum QUERY_KEYS {
   // USER KEYS

@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build --mode production",
-    "start:dev": "vite --mode development",
-    "start:prod": "vite preview --mode production"
+    "build": "tsc && vite build",
+    "start:dev": "vite",
+    "start:prod": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
