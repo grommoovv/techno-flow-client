@@ -1,7 +1,21 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Report } from '../services/reports'
 import { toast } from 'sonner'
 import { QUERY_KEYS } from '../constants'
+
+export const useGetReportsByUserId = (id: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_REPORTS_BY_USER_ID, id],
+    queryFn: () => Report.getByUserId(id),
+  })
+}
+
+export const useGetReports = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_REPORTS],
+    queryFn: () => Report.getAll(),
+  })
+}
 
 export const useCreateReport = () => {
   const queryClient = useQueryClient()

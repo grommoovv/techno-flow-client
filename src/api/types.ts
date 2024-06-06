@@ -6,6 +6,14 @@ export interface IUser {
   created_at: Date
 }
 
+export interface IReport {
+  id: number
+  message: string
+  create_at: Date
+  user_id: number
+  equipment_id: number
+}
+
 export interface IEquipment {
   id: number
   title: string

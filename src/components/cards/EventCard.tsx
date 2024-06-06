@@ -16,8 +16,8 @@ interface EventCardProps {
 
 const EventCard: FC<EventCardProps> = ({ event, className }) => {
   return (
-    <Link to={`/events/${event.id}`}>
-      <Card className={cn(className, '')}>
+    <Link className={cn(className)} to={`/events/${event.id}`}>
+      <Card className={cn(className, 'shadow-none')}>
         <CardHeader>
           <CardTitle>{event.title}</CardTitle>
           <CardDescription>{event.type}</CardDescription>

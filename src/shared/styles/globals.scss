@@ -25,4 +25,7 @@ body {
   .h3 {
     @apply text-zinc-800 font-semibold leading-none tracking-tight;
   }
+  .text-secondary {
+    @apply text-zinc-400 font-semibold leading-none tracking-tight;
+  }
 }

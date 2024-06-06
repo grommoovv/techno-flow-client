@@ -1,4 +1,5 @@
 import { $api } from '@/api/axios'
+import { __API__ } from '@/api/constants'
 import { SignInDto } from '@/api/services/users'
 import { IDataResponse, ISignInResponse, IUser } from '@/api/types'
 import axios from 'axios'
@@ -77,12 +78,9 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const checkIsUserAuthenticated = async (): Promise<void> => {
     setIsLoading(true)
     try {
-      const response = await axios.get<IDataResponse<ISignInResponse>>(
-        'http://localhost:8000/api/v1/auth/refresh',
-        {
-          withCredentials: true,
-        }
-      )
+      const response = await axios.get<IDataResponse<ISignInResponse>>(`${__API__}/auth/refresh`, {
+        withCredentials: true,
+      })
 
       if (response.data.data) {
         setUser(response.data.data?.user)

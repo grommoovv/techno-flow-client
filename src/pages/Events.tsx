@@ -82,9 +82,9 @@ const Events: FC<EventsProps> = () => {
         {filteredEvents && (
           <>
             {filteredEvents.length > 0 ? (
-              <div className='flex flex-wrap gap-4'>
+              <div className='grid grid-cols-5 gap-4'>
                 {filteredEvents.map((e) => (
-                  <EventCard className='w-max' event={e} key={e.id} />
+                  <EventCard className='w-full' event={e} key={e.id} />
                 ))}
               </div>
             ) : (

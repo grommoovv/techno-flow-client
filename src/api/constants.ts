@@ -1,12 +1,6 @@
-// export const ENV = {
-//   API: process?.env?.API,
-// }
-
-export const __API__ = 'http://localhost:8080/api/v1'
+export const __API__ = (import.meta.env.BASE_API_URL || 'http://localhost:8080/api/v1') as string
 
 export enum QUERY_KEYS {
-  // AUTH KEYS
-
   // USER KEYS
   GET_USERS = 'getUsers',
   GET_USER_BY_ID = 'getUserById',
@@ -26,6 +20,8 @@ export enum QUERY_KEYS {
   GET_EVENTS_BY_USER_ID = 'getEventsByUserId',
 
   // REPORTS KEYS
+  GET_REPORTS = 'getReports',
+  GET_REPORTS_BY_USER_ID = 'getReportsByUserId',
 
   // MAINTENANCE
   GET_MAINTENANCE = 'getMaintenance',
