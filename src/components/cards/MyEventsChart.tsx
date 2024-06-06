@@ -3,6 +3,7 @@ import { DonutChart } from '../charts/DonutChart'
 import { useGetEvents, useGetEventsByUserId } from '@/api/queries/events'
 import { useAuth } from '@/context/auth'
 import { calcPercent } from '@/shared/lib/helpers'
+import { Skeleton } from '../ui/skeleton'
 // import cls from './MyEventsChart.module.scss'
 
 interface MyEventsChartProps {}
@@ -11,11 +12,19 @@ const MyEventsChart: FC = () => {
   const {
     user: { id },
   } = useAuth()
-  const { data: events } = useGetEvents()
+  const { data: events, isLoading: isEventsLoading } = useGetEvents()
 
-  const { data: myEvents } = useGetEventsByUserId(id)
+  const { data: myEvents, isLoading: isMyEventsLoading } = useGetEventsByUserId(id)
 
   const percent = calcPercent(myEvents?.length ?? 1, events?.length ?? 1)
+
+  if (!events || !myEvents) {
+    return
+  }
+
+  if (isEventsLoading || isMyEventsLoading) {
+    return <Skeleton className='w-full h-[298px] rounded-3xl ' />
+  }
 
   return (
     <div className='flex items-center gap-10 rounded-3xl bg-zinc-100 text-zinc-800 p-6'>

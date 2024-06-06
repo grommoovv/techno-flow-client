@@ -74,9 +74,7 @@ const Home: FC<HomeProps> = () => {
             </div>
           )}
           <div className='grid grid-cols-4 gap-2'>
-            {overviewInfo.map((info) => (
-              <OverviewCard info={info} key={info.id} />
-            ))}
+            {!isLoading && overviewInfo.map((info) => <OverviewCard info={info} key={info.id} />)}
           </div>
           <div className='grid grid-cols-2 gap-2'>
             <MyEventsChart />
